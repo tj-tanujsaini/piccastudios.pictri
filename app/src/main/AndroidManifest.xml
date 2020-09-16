@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.piccastudios.pictri">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/pictri_logo"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/pictri_logo"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".HomeScreens.UserSettings" />
+        <activity android:name=".HomeScreens.HelpScreen" />
+        <activity android:name=".UserSection.AchievementsScreen" />
+        <activity android:name=".HomeScreens.LeaderBoard" />
+        <activity android:name=".UserSection.Profile" />
+        <activity android:name=".Category.SelectCategory" />
+        <activity android:name=".QuestionFrames.LevelOver" />
+        <activity android:name=".QuestionFrames.QuestionLoad" />
+        <activity android:name=".QuestionFrames.QFSelectOddOne" />
+        <activity android:name=".QuestionFrames.QuestionFrameText" />
+        <activity android:name=".QuestionFrames.QuestionFrameImage" />
+        <activity android:name=".HomeScreens.HomeScreen" />
+        <activity android:name=".Genre.SelectGenre" />
+        <activity android:name=".Account.SignInAccount" />
+        <activity android:name=".Account.LogoutScreen" />
+        <activity android:name=".QuestionFrames.QuestionFrameTrueFalse" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
+        <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3835158804169721~4332696405" />
+
+    </application>
+
+</manifest>

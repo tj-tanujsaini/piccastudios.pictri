@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/back_white1"
+    tools:context=".Account.SignInAccount">
+
+    <ImageView
+        android:id="@+id/topimage"
+        android:layout_width="match_parent"
+        android:layout_height="210dp"
+        android:paddingBottom="60dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/home_bar7" />
+
+    <ImageView
+        android:id="@+id/bottomImage"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:paddingTop="200dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/home_bar7" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_above="@id/bottomImage"
+        android:background="@drawable/green_gradient_lr"
+        android:scaleType="centerCrop" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_below="@id/topimage"
+        android:background="@drawable/green_gradient_lr"
+        android:scaleType="centerCrop" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/ca_cardView_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:cardCornerRadius="50dp"
+        app:cardElevation="2dp"
+        app:cardUseCompatPadding="true">
+
+        <ImageView
+            android:id="@+id/ca_logo"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/pictri_white" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/ca_app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ca_cardView_logo"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/carter_one"
+        android:shadowColor="@color/textWhite"
+        android:shadowDy="1"
+        android:shadowRadius="1"
+        android:text="PicTri"
+        android:textColor="@color/textWhite"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/ca_app_signIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/googleSignIn"
+        android:layout_alignStart="@id/googleSignIn"
+        android:layout_marginBottom="20dp"
+        android:text="Sign in"
+        android:textColor="@color/deselectGray"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/googleSignIn"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        app:cardCornerRadius="5dp">
+
+        <RelativeLayout
+            android:id="@+id/ca_googleSI"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/rec_round_white">
+
+            <ImageView
+                android:id="@+id/google_logo"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/g_logo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="8dp"
+                android:layout_toEndOf="@+id/google_logo"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Sign in with Google"
+                android:textSize="18sp" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/facebookSignIn"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/googleSignIn"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="30dp"
+        app:cardCornerRadius="5dp">
+
+        <RelativeLayout
+            android:id="@+id/ca_facebookSI"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/facebook_back">
+
+            <ImageView
+                android:id="@+id/f_logo"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/f_logo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="8dp"
+                android:layout_toEndOf="@+id/f_logo"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Continue with Facebook"
+                android:textColor="#5890FF"
+                android:textSize="18sp" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:id="@+id/privacy_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/facebookSignIn"
+        android:layout_alignStart="@id/facebookSignIn"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/ca_privacyCB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/buttonGreen"
+            android:text="I accept the " />
+
+        <TextView
+            android:id="@+id/ca_privacyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Privacy Policy"
+            android:textColor="@color/buttonLL4" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/termLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/privacy_layout"
+        android:layout_alignStart="@id/facebookSignIn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/ca_termsCB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/buttonGreen"
+            android:text="I accept the " />
+
+        <TextView
+            android:id="@+id/ca_termsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Terms and Conditions"
+            android:textColor="@color/buttonLL4" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/ca_about"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/termLayout"
+        android:layout_alignStart="@id/facebookSignIn"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:text="About Us"
+        android:textColor="@color/buttonLL4" />
+
+
+    <RelativeLayout
+        android:id="@+id/ca_signInProgress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="10dp"
+        android:visibility="invisible">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.8"
+            android:background="@color/darkBlack" />
+
+        <ProgressBar
+            android:id="@+id/ca_progressbar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_above="@id/ca_waitText"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:id="@+id/ca_waitText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="55dp"
+            android:fontFamily="@font/carter_one"
+            android:text="Making Things Ready . ."
+            android:textColor="@color/textWhite"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

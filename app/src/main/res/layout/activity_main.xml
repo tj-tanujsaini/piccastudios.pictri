@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/buttonLL2"
+    tools:context=".MainActivity">
+
+    <!--    <ImageView-->
+    <!--        android:src="@drawable/splash_screen"-->
+    <!--        android:scaleType="centerCrop"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"/>-->
+
+    <TextView
+        android:id="@+id/main_appName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/main_cardView"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/carter_one"
+        android:paddingHorizontal="10dp"
+        android:shadowColor="@color/darkBlack"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        android:shadowRadius="10"
+        android:text="Pictri"
+        android:textColor="@color/textWhite"
+        android:textSize="30sp" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/main_cardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        app:cardCornerRadius="50dp"
+        app:cardElevation="10dp"
+        app:cardUseCompatPadding="true">
+
+        <ImageView
+            android:id="@+id/main_logoIV"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/pictri_white" />
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>

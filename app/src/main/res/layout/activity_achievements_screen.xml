@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/back_white1"
+    tools:context=".UserSection.AchievementsScreen">
+
+
+    <ImageView
+        android:id="@+id/aas_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/back_bar"
+        android:scaleType="centerCrop" />
+
+
+    <ImageView
+        android:id="@+id/aas_back"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="15dp"
+        android:background="@drawable/rec_round"
+        android:padding="5dp"
+        android:src="@drawable/icon_back"
+        android:tint="@color/darkBlack" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:alpha="0.3"
+        android:background="@drawable/rec_semi_right"
+        android:fontFamily="@font/amaranth"
+        android:paddingVertical="5dp"
+        android:paddingStart="65dp"
+        android:paddingEnd="10dp"
+        android:text="@string/achievements"
+        android:textSize="25sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/amaranth"
+        android:paddingVertical="5dp"
+        android:paddingStart="65dp"
+        android:paddingEnd="10dp"
+        android:shadowColor="@color/textWhite"
+        android:shadowDx="-1"
+        android:shadowDy="-1"
+        android:shadowRadius="1"
+        android:text="@string/achievements"
+        android:textColor="@color/textYellow"
+        android:textSize="25sp" />
+
+    <ImageView
+        android:id="@+id/achieve_icon"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/icon_achieve"
+        android:tint="@color/textYellow" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/aas_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/aas_top_bar" />
+
+</RelativeLayout>

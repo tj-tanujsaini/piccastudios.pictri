@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="5dp">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/grad_yellow" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/badge_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:cardCornerRadius="35dp"
+        app:cardElevation="2dp"
+        app:cardUseCompatPadding="true">
+
+        <ImageView
+            android:id="@+id/al_badgeIcon"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:padding="10dp"
+            android:src="@drawable/ach_scout" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/al_badgeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_toEndOf="@id/badge_card"
+        android:fontFamily="@font/ubuntu_light"
+        android:shadowColor="@color/textWhite"
+        android:shadowDx="-1"
+        android:shadowRadius="1"
+        android:text="@string/badge_name"
+        android:textColor="@color/buttonGreen"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/al_badgeSubtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/al_badgeText"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@id/badge_card"
+        android:fontFamily="@font/ubuntu_light"
+        android:text="@string/badge_des"
+        android:textSize="12sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="30dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/al_levelComplete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/amaranth"
+            android:text="@string/badge_level_complete"
+            android:textColor="@color/buttonGreen"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/al_levelTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/amaranth"
+            android:text="@string/badge_total_level"
+            android:textColor="@color/buttonGreen"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/al_useBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/rec_round_trans"
+        android:fontFamily="@font/amaranth"
+        android:text="@string/use_badge"
+        android:textAllCaps="false"
+        android:textColor="@color/buttonGreen"
+        android:textSize="18sp"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/al_appliedBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/rec_round_trans"
+        android:fontFamily="@font/amaranth"
+        android:text="@string/in_use"
+        android:textAllCaps="false"
+        android:textColor="@color/darkBlack"
+        android:textSize="18sp"
+        android:visibility="invisible" />
+
+    <ProgressBar
+        android:id="@+id/al_progressbar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="40dp"
+        android:indeterminateTint="@color/buttonGreen"
+        android:visibility="invisible" />
+
+</RelativeLayout>

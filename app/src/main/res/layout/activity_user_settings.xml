@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgreen4"
+    tools:context=".HomeScreens.UserSettings">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="10">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="7"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/us_privacyText"
+                android:layout_width="350dp"
+                android:layout_height="45dp"
+                android:background="@drawable/rec_round_white"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:text="Privacy Policy"
+                android:textColor="@color/buttonLL4"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/us_termsText"
+                android:layout_width="350dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rec_round_white"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:text="Terms and Conditions"
+                android:textColor="@color/buttonLL4"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/us_aboutUs"
+                android:layout_width="350dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rec_round_white"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:text="About Us"
+                android:textColor="@color/buttonLL4"
+                android:textSize="20sp" />
+
+            <Switch
+                android:id="@+id/us_audioSwitch"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/rec_round_white"
+                android:checked="false"
+                android:fontFamily="@font/roboto_medium"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="10dp"
+                android:text="Audio"
+                android:textColor="@color/buttonGreen"
+                android:textSize="20sp"
+                android:theme="@style/SCBSwitch" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/us_saveSettings"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/us_logOut"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/rec_button_green"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Save"
+        android:textAllCaps="false"
+        android:textColor="@color/textWhite"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/us_logOut"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/rec_button_red"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Sign Out"
+        android:textAllCaps="false"
+        android:textColor="@color/textWhite"
+        android:textSize="20sp" />
+
+</RelativeLayout>

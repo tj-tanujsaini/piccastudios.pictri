@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#762095</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#FFFFFF</color>
+
+
+    <color name="textWhite">#FFFFFF</color>
+    <color name="textYellow">#FDD835</color>
+    <color name="textRed">#F63535</color>
+    <color name="textGreen">#036E12</color>
+    <color name="deselectGray">#AFADAD</color>
+    <color name="textPurpleLight">#B959DC</color>
+    <color name="textPurple">#89038E</color>
+    <color name="buttonBackRed">#D80B75</color>
+    <color name="buttonBackRedD">#E80729</color>
+    <color name="buttonBackGrayL">#F6F6F6</color>
+    <color name="buttonBackGrayL2">#27F6F6F6</color>
+    <color name="buttonBackPurple">#8D0393</color>
+    <color name="buttonBackPurpleL">#AC00B3</color>
+
+<!--    Green Theme-->
+    <color name="buttonGreen">#00B39E</color>
+    <color name="buttonGreen2">#05A38B</color>
+    <color name="buttonRed">#F43E3E</color>
+    <color name="greenLeaf">#21DD15</color>
+    <color name="backGreen">#00897B</color>
+    <color name="backBlue">#0AB4D1</color>
+    <color name="backGreenDark">#00B39E</color>
+    <color name="backGreenLight">#7CFFF1</color>
+    <color name="darkBlack">#000000</color>
+
+    <!--    Orange Theme-->
+    <color name="buttonOrange">#FF6F00</color>
+    <color name="buttonLL1">#58F8AD</color>
+    <color name="buttonLL2">#0ED8BA</color>
+    <color name="buttonLL3">#00D9FF</color>
+    <color name="buttonLL4">#0099FF</color>
+    <color name="buttonLL5">#58F8AD</color>
+    <color name="buttonLL6">#1700B39E</color>
+    <color name="backOrange">#F36302</color>
+    <color name="backYellow">#F3DB02</color>
+    <color name="backOrangeDark">#AE4600</color>
+    <color name="backOrangeLight">#F18B46</color>
+
+    <!--    Blue Theme-->
+    <color name="colorBlue">#1890FF</color>
+    <color name="colorBlueLight">#18AEFF</color>
+    <color name="colorPurple">#6B5695</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorGray">#E8E8E8</color>
+    <color name="colorWhite">#FFFFFF</color>
+
+</resources>

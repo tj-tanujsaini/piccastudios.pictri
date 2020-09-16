@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        app:cardBackgroundColor="@color/backGreen"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="10dp"
+        app:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingTop="40dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="50dp">
+
+            <TextView
+                android:id="@+id/au_pictri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/carter_one"
+                android:text="@string/pictri"
+                android:textColor="@color/textWhite"
+                android:textSize="55sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/au_subtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/au_pictri"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/ubuntu_light"
+                android:text="@string/a_quiz_app_train_your_mind_and_know_what_you_really_know"
+                android:textColor="@color/textWhite"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/Developer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/au_subtext"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/ubuntu_light"
+                android:text="@string/developed_by_piccastudios"
+                android:textColor="@color/textWhite"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/Version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Developer"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/ubuntu_light"
+                android:text="@string/version_1_0"
+                android:textColor="@color/textWhite"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/Email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Version"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/ubuntu_light"
+                android:text="@string/email_us"
+                android:textColor="@color/textWhite"
+                android:textSize="15sp" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

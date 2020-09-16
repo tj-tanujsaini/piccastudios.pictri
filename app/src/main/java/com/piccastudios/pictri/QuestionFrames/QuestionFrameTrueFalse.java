@@ -1,0 +1,528 @@
+package com.piccastudios.pictri.QuestionFrames;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
+import android.util.Log;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.facebook.ads.Ad;
+import com.facebook.ads.AdError;
+import com.facebook.ads.AdSize;
+import com.facebook.ads.AudienceNetworkAds;
+import com.facebook.ads.RewardedVideoAd;
+import com.facebook.ads.RewardedVideoAdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.piccastudios.pictri.HomeScreens.HomeScreen;
+import com.piccastudios.pictri.HomeScreens.SoundClass;
+import com.piccastudios.pictri.QuestionBank.QuesModelTrueFalse;
+import com.piccastudios.pictri.QuestionBank.QuestionSet;
+import com.piccastudios.pictri.R;
+import com.piccastudios.pictri.UserSection.SaveData;
+import com.piccastudios.pictri.UserSection.UserDetails;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class QuestionFrameTrueFalse extends AppCompatActivity implements View.OnClickListener {
+
+    private static final String TAG = "qfi_logCheck";
+    private TextView quesTimer;
+    private long timeRemain = 70000;
+    private CountDownTimer cT;
+    private ProgressBar progressBar;
+
+    //***** LifeLines *****//
+
+    private CardView lifeLine1, lifeLine2, lifeLine3, lifeLine4;
+    private RelativeLayout adView1, adView2, adView3, adView4;
+    private TextView quesNo;
+    //*** lifeLine Over ***//
+
+    private Button trueButton, falseButton;
+    private static String answer;
+    private static String quesID;
+    private TextView quesText;
+    private ImageView starIcon, corIcon, wrIcon, lifeIcon;
+    private TextView starCounts, lifeCounts;
+
+    private QuestionSet questionSet;
+    private int questionIndex = 0;
+    private long points = 0;
+    private Animation fadeInAnim;
+
+    private List<QuesModelTrueFalse> quesList;
+
+    //
+    private UserDetails userDetails;
+    private List<String> quesDone;
+    Handler handler;
+
+    private SoundClass soundClass;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_question_frame_true_false);
+
+        quesTimer = findViewById(R.id.qf_timer);
+        progressBar = findViewById(R.id.qf_pb);
+        corIcon = findViewById(R.id.qf_correctIcon);
+        wrIcon = findViewById(R.id.qf_wrongIcon);
+
+        trueButton = findViewById(R.id.aqftf_trueButton);
+        falseButton = findViewById(R.id.aqftf_falseButton);
+        quesText = findViewById(R.id.aqftf_questionText);
+        starIcon = findViewById(R.id.qf_starIcon);
+        starCounts = findViewById(R.id.qf_starText);
+
+        // ****
+        lifeIcon = findViewById(R.id.qf_lifeIcon);
+        lifeCounts = findViewById(R.id.qf_lifeText);
+        quesNo = findViewById(R.id.qf_quesNo);
+        adView1 = findViewById(R.id.qf_adView1);
+        adView2 = findViewById(R.id.qf_adView2);
+        adView3 = findViewById(R.id.qf_adView3);
+        adView4 = findViewById(R.id.qf_adView4);
+
+        lifeLine1 = findViewById(R.id.qf_lifeLine1);
+        lifeLine2 = findViewById(R.id.qf_lifeLine2);
+        lifeLine3 = findViewById(R.id.qf_lifeLine3);
+        lifeLine4 = findViewById(R.id.qf_lifeLine4);
+        //**
+
+        //
+        userDetails = UserDetails.getInstance(this);
+        fadeInAnim = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+
+        //*****
+
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        AdView mAdView = findViewById(R.id.qf_adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+        //*****
+
+        timerStart(timeRemain);
+        timerPause();
+
+        questionSet = QuestionSet.getInstance(this);
+
+        quesList = new ArrayList<>();
+        quesList = questionSet.getQuesModelTrueFalseList();
+
+        quesDone = new ArrayList<>();
+        quesDone = userDetails.getQuesDone();
+
+        soundClass = SoundClass.getInstance(this);
+
+        lifeCounts.setText(String.valueOf(questionSet.getLife()));
+        setLifelines();
+
+        setQuestion();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        timerPause();
+        Log.d(TAG, "onStop: Activity Stop and timer pause");
+    }
+
+    public void timerStart(long timeLength) {
+        cT = new CountDownTimer(timeLength, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                timeRemain = millisUntilFinished;
+                progressBar.setProgress((int) ((timeRemain / 1000) * (142)));
+                if (timeRemain < 67000) {
+                    quesTimer.setTextColor(getColor(R.color.textYellow));
+                }
+                if (timeRemain < 21000) {
+                    quesTimer.setTextColor(getColor(R.color.textRed));
+                }
+//                String min = String.format("%02d", millisUntilFinished/60000);
+                int sec = (int) ((millisUntilFinished) / 1000);
+                quesTimer.setText(String.format("%02d", sec));
+            }
+
+            public void onFinish() {
+                if (userDetails.isAudioStatus()) {
+                    soundClass.playSound(3);
+                }
+                AlertDialog.Builder builder = new AlertDialog.Builder(QuestionFrameTrueFalse.this);
+                AlertDialog dialog;
+                builder.setTitle(" Level Over")
+                        .setMessage("Times Up!")
+                        .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                questionSet.setPoints(points);
+                                startActivity(new Intent(QuestionFrameTrueFalse.this, LevelOver.class));
+                                finish();
+                            }
+                        })
+                        .setIcon(getDrawable(R.drawable.icon_addtime));
+                dialog = builder.create();
+                dialog.setCancelable(false);
+                dialog.setCanceledOnTouchOutside(false);
+                dialog.show();
+
+                dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(getColor(R.color.buttonGreen));
+            }
+        };
+        cT.start();
+    }
+
+    public void timerPause() {
+        cT.cancel();
+    }
+
+    private void timerResume() {
+        timerStart(timeRemain);
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()) {
+            case R.id.aqftf_trueButton:
+                if (!checkAnswer("TRUE")) {
+                    trueButton.setBackground(getDrawable(R.drawable.rec_button_red));
+                } else {
+                    trueButton.setBackground(getDrawable(R.drawable.rec_button_green));
+                }
+                break;
+            case R.id.aqftf_falseButton:
+                if (!checkAnswer("FALSE")) {
+                    falseButton.setBackground(getDrawable(R.drawable.rec_button_red));
+                } else {
+                    falseButton.setBackground(getDrawable(R.drawable.rec_button_green));
+                }
+                break;
+            case R.id.qf_lifeLine1:
+                if (userDetails.isAudioStatus()) {
+                    soundClass.playSound(3);
+                }
+                questionSet.setLlUpdate1(true);
+                userDetails.setLifeLine1(false);
+                userDetails.setLLTS1(System.currentTimeMillis());
+                deselectWrongOptions();
+                adView1.setVisibility(View.VISIBLE);
+                break;
+            case R.id.qf_lifeLine2:
+                if (userDetails.isAudioStatus()) {
+                    soundClass.playSound(3);
+                }
+                questionSet.setLlUpdate2(true);
+                userDetails.setLifeLine2(false);
+                userDetails.setLLTS2(System.currentTimeMillis());
+                removeTwoOptions();
+                adView2.setVisibility(View.VISIBLE);
+                break;
+            case R.id.qf_lifeLine3:
+                if (userDetails.isAudioStatus()) {
+                    soundClass.playSound(3);
+                }
+                questionSet.setLlUpdate3(true);
+                userDetails.setLifeLine3(false);
+                userDetails.setLLTS3(System.currentTimeMillis());
+                adView3.setVisibility(View.VISIBLE);
+                questionIndex += 1;
+                timerPause();
+                timeRemain -= 1;
+                setQuestion();
+                break;
+            case R.id.qf_lifeLine4:
+                if (userDetails.isAudioStatus()) {
+                    soundClass.playSound(3);
+                }
+                questionSet.setLlUpdate4(true);
+                userDetails.setLifeLine4(false);
+                userDetails.setLLTS3(System.currentTimeMillis());
+                timerPause();
+                timeRemain -= 1;
+                timeRemain += 15000;
+                if (timeRemain >= 100000) {
+                    timeRemain = 100000;
+                }
+                timerResume();
+                adView4.setVisibility(View.VISIBLE);
+                break;
+            //*
+        }
+    }
+
+    private void removeTwoOptions() {
+        answer = answer.toUpperCase();
+        if (answer.equals("TRUE")) {
+            falseButton.setBackground(getDrawable(R.drawable.rec_button_deselect));
+        } else {
+            trueButton.setBackground(getDrawable(R.drawable.rec_button_deselect));
+        }
+    }
+
+    private void deselectWrongOptions() {
+
+        answer = answer.toUpperCase();
+        if (answer.equals("TRUE")) {
+            falseButton.setBackground(getDrawable(R.drawable.rec_button_deselect));
+        } else {
+            trueButton.setBackground(getDrawable(R.drawable.rec_button_deselect));
+        }
+    }
+
+
+    private boolean checkAnswer(String response) {
+
+        trueButton.setClickable(false);
+        falseButton.setClickable(false);
+
+        handler = new Handler();
+        questionSet.setPoints(points);
+        //
+        userDetails.setTotalQuestions(userDetails.getTotalQuestions() + 1);
+
+        answer = answer.toUpperCase();
+
+        if (answer.equals(response)) {
+            if (userDetails.isAudioStatus()) {
+                soundClass.playSound(4);
+            }
+            corIcon.setVisibility(View.VISIBLE);
+            corIcon.startAnimation(fadeInAnim);
+
+            starIcon.startAnimation(fadeInAnim);
+            points += 10;
+            starCounts.setText(String.valueOf(points));
+
+            //
+            userDetails.setTotalCorrectAnswer(userDetails.getTotalCorrectAnswer() + 1);
+            quesDone.add(quesID);
+            userDetails.setQuesDone(quesDone);
+
+
+            timerPause();
+            timeRemain -= 1;
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    questionIndex += 1;
+                    if (questionIndex == 10) {
+                        questionSet.setPoints(points);
+                        //
+                        userDetails.setLevelsCompleted(userDetails.getLevelsCompleted() + 1);
+                        startActivity(new Intent(QuestionFrameTrueFalse.this, LevelOver.class));
+                        finish();
+                    } else {
+                        setQuestion();
+                    }
+                }
+            }, 1000);
+            return true;
+        } else {
+            if (userDetails.isAudioStatus()) {
+                soundClass.playSound(5);
+            }
+            wrIcon.setVisibility(View.VISIBLE);
+            wrIcon.startAnimation(fadeInAnim);
+
+            //***** Deduct life *****//
+            lifeIcon.startAnimation(fadeInAnim);
+            if (questionSet.getLife() > 1) {
+                questionSet.setLife(questionSet.getLife() - 1);
+                lifeCounts.setText(String.valueOf(questionSet.getLife()));
+
+                timerPause();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        questionIndex += 1;
+                        if (questionIndex == 10) {
+                            questionSet.setPoints(points);
+                            //
+                            userDetails.setLevelsCompleted(userDetails.getLevelsCompleted() + 1);
+                            startActivity(new Intent(QuestionFrameTrueFalse.this, LevelOver.class));
+                            finish();
+                        } else {
+                            setQuestion();
+                        }
+                    }
+                }, 1000);
+
+            } else {
+
+                lifeCounts.setText("0");
+                questionSet.setLife(0);
+                timerPause();
+                timeRemain -= 1;
+                if (questionIndex < 9) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    AlertDialog dialog;
+                    builder.setTitle(" Level Over")
+                            .setMessage("You have Used All of Your Lifes.")
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                    startActivity(new Intent(QuestionFrameTrueFalse.this, LevelOver.class));
+                                    finish();
+                                }
+                            })
+                            .setIcon(getDrawable(R.drawable.icon_life));
+                    dialog = builder.create();
+                    dialog.setCancelable(false);
+                    dialog.setCanceledOnTouchOutside(false);
+                    dialog.show();
+
+                    dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(getColor(R.color.buttonGreen));
+                } else {
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            questionSet.setPoints(points);
+                            //
+                            userDetails.setLevelsCompleted(userDetails.getLevelsCompleted() + 1);
+                            startActivity(new Intent(QuestionFrameTrueFalse.this, LevelOver.class));
+                            finish();
+                        }
+                    }, 1000);
+
+                }
+            }
+            //***** Life Deduct Over *****//
+
+            return false;
+        }
+    }
+
+    private void setQuestion() {
+
+        trueButton.setClickable(false);
+        falseButton.setClickable(false);
+
+        quesNo.setText(String.valueOf(questionIndex + 1));
+
+        if (questionIndex == 10) {
+            questionSet.setPoints(points);
+            //
+            userDetails.setLevelsCompleted(userDetails.getLevelsCompleted() + 1);
+            startActivity(new Intent(QuestionFrameTrueFalse.this, LevelOver.class));
+            finish();
+        }
+        if (questionIndex == 9) {
+            quesNo.setTextColor(getColor(R.color.textYellow));
+        }
+
+        trueButton.setOnClickListener(this);
+        falseButton.setOnClickListener(this);
+
+        //Set theme to default
+        trueButton.setBackground(getDrawable(R.drawable.rec_button_white));
+        falseButton.setBackground(getDrawable(R.drawable.rec_button_white));
+        corIcon.setVisibility(View.INVISIBLE);
+        wrIcon.setVisibility(View.INVISIBLE);
+        //
+
+        //
+        lifeLine1.setOnClickListener(this);
+        lifeLine2.setOnClickListener(this);
+        lifeLine3.setOnClickListener(this);
+        lifeLine4.setOnClickListener(this);
+
+        adView1.setOnClickListener(this);
+        adView2.setOnClickListener(this);
+        adView3.setOnClickListener(this);
+        adView4.setOnClickListener(this);
+
+        QuesModelTrueFalse quesModelTrueFalse;
+        quesModelTrueFalse = quesList.get(questionIndex);
+        timerResume();
+
+        quesText.setText(quesModelTrueFalse.getQuestion());
+        quesID = quesModelTrueFalse.getQuesId();
+
+        answer = quesModelTrueFalse.getAnswer();
+
+    }
+
+    private void setLifelines() {
+
+        if (!userDetails.isLifeLine1()) {
+            adView1.setVisibility(View.VISIBLE);
+        }
+
+        if (!userDetails.isLifeLine2()) {
+            adView2.setVisibility(View.VISIBLE);
+        }
+
+        if (!userDetails.isLifeLine3()) {
+            adView3.setVisibility(View.VISIBLE);
+        }
+
+        if (!userDetails.isLifeLine4()) {
+            adView4.setVisibility(View.VISIBLE);
+        }
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        // super.onBackPressed();
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog dialog;
+
+        builder.setIcon(getDrawable(R.drawable.icon_info))
+                .setTitle("Exit Level")
+                .setMessage("Sure to leave the Level in between?")
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setPositiveButton("Exit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        timerPause();
+                        new SaveData().execute(QuestionFrameTrueFalse.this);
+                        startActivity(new Intent(QuestionFrameTrueFalse.this, HomeScreen.class));
+                        finish();
+                    }
+                });
+
+        dialog = builder.create();
+        dialog.show();
+
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(getColor(R.color.buttonRed));
+        dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(getColor(R.color.buttonGreen));
+    }
+
+}

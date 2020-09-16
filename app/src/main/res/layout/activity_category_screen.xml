@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgreen4"
+    tools:context=".Category.SelectCategory">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="45dp"
+        android:layout_toStartOf="@+id/acs_activityImage"
+        android:background="@color/textWhite" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="45dp"
+        android:layout_toEndOf="@+id/acs_activityImage"
+        android:background="@color/textWhite" />
+
+    <ImageView
+        android:id="@+id/acs_activityImage"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/ring_shape"
+        android:padding="15dp"
+        android:src="@drawable/connection" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="10">
+
+        <TextView
+            android:id="@+id/hs_textCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1.5"
+            android:fontFamily="@font/carter_one"
+            android:gravity="bottom"
+            android:shadowColor="@color/colorPrimaryDark"
+            android:shadowDx="-1"
+            android:shadowDy="-1"
+            android:shadowRadius="1"
+            android:text="@string/category_quote"
+            android:textColor="@color/textWhite"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+        <!--        \n\t\t\t\tLet's Conquer the Neeext level-->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="8"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="15dp"
+                app:cardUseCompatPadding="true">
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/hs_rv_categories"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:padding="20dp" />
+
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/hs_textCategory2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/carter_one"
+        android:gravity="bottom"
+        android:shadowColor="@color/colorPrimaryDark"
+        android:shadowDx="-1"
+        android:shadowDy="-1"
+        android:shadowRadius="1"
+        android:text=". . let's Conquer the Neeext level"
+        android:textColor="@color/textWhite"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/asg_genreText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        android:fontFamily="@font/aclonica"
+        android:gravity="bottom"
+        android:shadowColor="@color/colorPrimaryDark"
+        android:shadowDx="-1"
+        android:shadowDy="-1"
+        android:shadowRadius="1"
+        android:text="Category"
+        android:textColor="@color/textYellow"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+</RelativeLayout>
